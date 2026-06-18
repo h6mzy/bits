@@ -1,4 +1,4 @@
-export function escapeHTML(value = '') {
+export const escapeHTML = (value = '') => {
   return String(value)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
