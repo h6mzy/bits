@@ -22,6 +22,8 @@ chunk · escapeHTML · formatDate · optimizeImage · pickRandom · startCountdo
 
 ## Usage
 
-```import { Toast } from "bits"
+```
+import { Toast } from "bits"
+
 Toast.show("Hello")
 ```
