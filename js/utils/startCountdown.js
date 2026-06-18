@@ -1,4 +1,4 @@
-export function startCountdown(target, { onTick, onEnd } = {}) {
+export const startCountdown = (target, { onTick, onEnd } = {}) => {
   const end =
     typeof target === 'number'
       ? target
