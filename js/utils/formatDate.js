@@ -1,4 +1,4 @@
-export function formatDate(value, opts = {}) {
+export const formatDate = (value, opts = {}) => {
   const {
     locale = 'en-US',
     day = 'numeric',
