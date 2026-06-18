@@ -1,4 +1,4 @@
-export default async function optimizeImage(
+export async function optimizeImage(
   file,
   {
     width = 500,
