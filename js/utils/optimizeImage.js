@@ -1,11 +1,11 @@
-export async function optimizeImage(
+export const optimizeImage = async(
   file,
   {
     width = 500,
     type = 'image/webp',
     quality = 0.6
   } = {}
-) {
+) => {
   const bitmap = await createImageBitmap(file);
 
   // prevent upscaling
