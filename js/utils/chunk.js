@@ -1,4 +1,4 @@
-export function chunk(arr, size = 11) {
+export const chunk = (arr, size = 11) => {
   const out = [];
 
   for (let i = 0; i < arr.length; i += size) {
