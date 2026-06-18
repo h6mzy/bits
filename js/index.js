@@ -18,5 +18,5 @@ export {
   formatDate,
   optimizeImage,
   pickRandom,
-  startCoundown
+  startCountdown
 };
