@@ -1,0 +1,40 @@
+dialog {
+  width: 100dvw;
+  height: 100dvh;
+  max-width: 100dvw;
+  max-height: 100dvh;
+  overflow: hidden;
+  border: 0;
+  padding: 12px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: currentColor;
+  opacity: 0;
+  transform: scale(.95);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,.7);
+}
+
+.dialog-body {
+  padding: 12px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 100%;
+  overflow-y: auto;
+  background: #fff;
+  color: currentColor;
+}
