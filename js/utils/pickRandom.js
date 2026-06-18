@@ -1,4 +1,4 @@
-export function pickRandom(arr, count = 1) {
+export const pickRandom = (arr, count = 1) => {
   const copy = [...arr];
 
   for (let i = copy.length - 1; i > 0; i--) {
