@@ -1,10 +1,17 @@
 const Drawer = (() => {
   let drawer;
-  let backdrop;
 
-  function init(selector = '#drawer') {
-    drawer = document.querySelector(selector);
-    drawer.addEventListener('click', close);
+  function init() {
+    drawer = document.createElement('aside');
+
+    drawer.id = 'drawer';
+    drawer.className = 'drawer';
+
+    document.body.appendChild(drawer);
+
+    drawer.addEventListener('click', e => {
+      if (e.target === drawer) close();
+    });
   }
 
   function open(content) {
@@ -15,14 +22,14 @@ const Drawer = (() => {
     } else {
       drawer.append(content);
     }
-  
+
     drawer.classList.add('open');
-    backdrop.classList.add('open');
+
+    return drawer;
   }
 
   function close() {
     drawer.classList.remove('open');
-    backdrop.classList.remove('open');
   }
 
   return {
