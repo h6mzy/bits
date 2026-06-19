@@ -4,13 +4,7 @@ const Drawer = (() => {
 
   function init(selector = '#drawer') {
     drawer = document.querySelector(selector);
-
-    backdrop = document.createElement('div');
-    backdrop.className = 'drawer-backdrop';
-
-    backdrop.addEventListener('click', close);
-
-    document.body.appendChild(backdrop);
+    drawer.addEventListener('click', close);
   }
 
   function open(content) {
