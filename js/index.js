@@ -1,4 +1,5 @@
 import Dialog from './ui/Dialog.js';
+import Drawer from './ui/Drawer.js';
 import Toast from './ui/Toast.js';
 import Countdown from './ui/Countdown.js';
 
@@ -12,6 +13,7 @@ import { startCountdown } from './utils/startCountdown.js';
 
 export {
   Dialog,
+  Drawer,
   Toast,
   Countdown,
   chunk,
