@@ -3,10 +3,8 @@ const Drawer = (() => {
 
   function init() {
     drawer = document.createElement('aside');
-
     drawer.id = 'drawer';
-    drawer.className = 'drawer';
-
+    
     document.body.appendChild(drawer);
 
     drawer.addEventListener('click', e => {
