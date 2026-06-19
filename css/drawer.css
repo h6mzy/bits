@@ -1,0 +1,49 @@
+#drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+}
+
+#drawer.open {
+  transform: translateX(0);
+}
+
+#drawer-backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(500px, 100vw);
+  background: rgba(0,0,0,.7);
+  padding: 1rem;
+}
+
+.drawer-body,
+.drawer-header {
+  position: relative;
+}
+
+.drawer-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#close-drawer {
+  border: 0;
+  background: transparent;
+  color: currentColor;
+  font-size: 2rem;
+  padding: 0;
+}
