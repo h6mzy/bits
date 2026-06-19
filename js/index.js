@@ -4,6 +4,7 @@ import Toast from './ui/Toast.js';
 import Countdown from './ui/Countdown.js';
 
 import { chunk } from './utils/chunk.js';
+import { drag } from './utils/drag.js';
 import { escapeHTML } from './utils/escapeHTML.js';
 import { formatDate } from './utils/formatDate.js';
 import { loadImage } from './utils/loadImage.js';
@@ -17,6 +18,7 @@ export {
   Toast,
   Countdown,
   chunk,
+  drag,
   escapeHTML,
   formatDate,
   loadImage,
