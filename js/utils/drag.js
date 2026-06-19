@@ -1,24 +1,45 @@
-export const drag = (el, {
+export function drag(el, {
   start = () => {},
   move = () => {},
   end = () => {}
-} = {}) => {
-  let active = false;
+} = {}) {
+  let startX;
+  let startY;
 
   el.addEventListener('pointerdown', e => {
-    active = true;
+    startX = e.clientX;
+    startY = e.clientY;
+
     el.setPointerCapture(e.pointerId);
-    start(e);
+
+    start({
+      event: e,
+      x: startX,
+      y: startY
+    });
   });
 
   el.addEventListener('pointermove', e => {
-    if (!active) return;
-    move(e);
+    if (!el.hasPointerCapture(e.pointerId)) return;
+
+    move({
+      event: e,
+      x: e.clientX,
+      y: e.clientY,
+      dx: e.clientX - startX,
+      dy: e.clientY - startY
+    });
   });
 
   el.addEventListener('pointerup', e => {
-    if (!active) return;
-    active = false;
-    end(e);
+    if (!el.hasPointerCapture(e.pointerId)) return;
+
+    end({
+      event: e,
+      x: e.clientX,
+      y: e.clientY,
+      dx: e.clientX - startX,
+      dy: e.clientY - startY
+    });
   });
 }
