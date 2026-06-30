@@ -1,11 +1,11 @@
 const Drawer = (() => {
   let drawer;
 
-  function init() {
+  function init(parent = document.body) {
     drawer = document.createElement('aside');
     drawer.id = 'drawer';
-    
-    document.body.appendChild(drawer);
+
+    parent.appendChild(drawer);
 
     drawer.addEventListener('click', e => {
       if (e.target === drawer) close();
