@@ -7,7 +7,7 @@ import { chunk } from './utils/chunk.js';
 import { drag } from './utils/drag.js';
 import { escapeHTML } from './utils/escapeHTML.js';
 import { formatDate } from './utils/formatDate.js';
-import { injectPseudoStyle } from './utils/injectPseudoStyle.js';
+import { injectCSS } from './utils/injectCSS.js';
 import { loadImage } from './utils/loadImage.js';
 import { optimizeImage } from './utils/optimizeImage.js';
 import { pickRandom } from './utils/pickRandom.js';
@@ -22,7 +22,7 @@ export {
   drag,
   escapeHTML,
   formatDate,
-  injectPseudoStyle,
+  injectCSS,
   loadImage,
   optimizeImage,
   pickRandom,
