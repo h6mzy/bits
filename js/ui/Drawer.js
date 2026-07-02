@@ -64,7 +64,10 @@ const Drawer = (() => {
     return drawer;
   }
 
-  function open(content, options = {}) {
+  function open(content, {
+    side = 'right',
+    onMount
+  } = {}) {
     if (!drawer) init();
 
     side = options.side ?? 'right';
@@ -106,6 +109,8 @@ const Drawer = (() => {
       drawer.style.pointerEvents = 'auto';
       panel.style.transform = 'translate(0, 0)';
     });
+
+    onMount?.(panel);
 
     return panel;
   }
