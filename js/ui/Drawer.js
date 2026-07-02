@@ -88,7 +88,6 @@ const Drawer = (() => {
       background: 'var(--bits-drawer-bg, white)',
       overflow: 'auto',
       padding: 'var(--bits-drawer-padding, 1rem)',
-      boxShadow: '0 0 1rem rgb(0 0 0 / .15)',
       transform: layout.transform,
       transition: 'transform .2s'
     });
