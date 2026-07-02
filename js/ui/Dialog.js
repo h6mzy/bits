@@ -1,4 +1,4 @@
-import { injectCSS } from './utils/injectCSS.js';
+import { injectCSS } from '../utils/injectCSS.js';
 
 const defaultDialogStyle = {
   border: 'none',
