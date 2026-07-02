@@ -1,26 +1,20 @@
 const defaultDialogStyle = {
-  position: 'fixed',
-  inset: '0',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  background: 'var(--bits-dialog-backdrop, transparent)',
-  opacity: '0',
-  visibility: 'hidden',
-  pointerEvents: 'none',
-  transition: 'opacity .2s',
-  zIndex: '9999'
-}
+  border: 'none',
+  padding: '0',
+  margin: 'auto',
+  background: 'transparent',
+  overflow: 'visible'
+};
 
 const defaultBodyStyle = {
   padding: 'var(--bits-dialog-padding, 1rem)',
+  background: 'var(--bits-dialog-bg, white)',
+  borderRadius: '12px',
   width: '100%',
   maxWidth: '500px',
-  height: '100%',
-  maxHeight: '100%',
-  overflowY: 'auto',
-  background: 'var(--bits-dialog-bg, white)'
-}
+  maxHeight: '90vh',
+  overflowY: 'auto'
+};
 
 const Dialog = (() => {
   let dialog;
@@ -41,7 +35,15 @@ const Dialog = (() => {
     parent.append(dialog);
 
     dialog.addEventListener('click', e => {
-      if (e.target === dialog) close();
+      const rect = body.getBoundingClientRect();
+
+      const inside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+
+      if (!inside) close();
     });
 
     dialog.addEventListener('cancel', e => {
