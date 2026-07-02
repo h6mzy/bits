@@ -86,6 +86,7 @@ const Drawer = (() => {
       maxHeight: '100%',
       background: 'var(--bits-drawer-bg, white)',
       overflow: 'auto',
+      padding: '1rem',
       boxShadow: '0 0 1rem rgb(0 0 0 / .15)',
       transform: layout.transform,
       transition: 'transform .2s'
