@@ -1,50 +1,79 @@
+const defaultDialogStyle = {
+  position = 'fixed',
+  inset: '0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'var(--bits-dialog-backdrop, transparent)',
+  opacity: '0',
+  visibility: 'hidden',
+  pointerEvents: 'none',
+  transition: 'opacity .2s',
+  zIndex: '9999'
+}
+
+const defaultBodyStyle = {
+  padding: 'var(--bits-dialog-padding, 1rem)',
+  width: '100%',
+  maxWidth: '500px',
+  height: '100%',
+  maxHeight: '100%',
+  overflowY: 'auto',
+  background: 'var(--bits-dialog-bg, white)'
+}
+
 const Dialog = (() => {
-  let el, content;
+  let dialog;
+  let body;
 
-  function init(selector = '#dialog') {
-    el = document.querySelector(selector);
+  function init(parent = document.body, { dialogStyle, bodyStyle } = {}) {
+    dialog = document.createElement('dialog');
+    dialog.className = 'dialog';
+    body = document.createElement('div');
 
-    if (!el) throw new Error('Dialog element not found');
+    Object.assign(dialog.style, defaultDialogStyle);
+    Object.assign(body.style, defaultBodyStyle);
 
-    content = el.querySelector('.dialog-content');
+    Object.assign(dialog.style, dialogStyle);
+    Object.assign(body.style, bodyStyle);
 
-    if (!content) {
-      content = document.createElement('div');
-      content.className = 'dialog-body';
-      el.appendChild(content);
-    }
+    dialog.append(body);
+    parent.append(dialog);
 
-    el.addEventListener('click', e => {
-      if (e.target === el) close();
+    dialog.addEventListener('click', e => {
+      if (e.target === dialog) close();
     });
 
-    el.addEventListener('cancel', e => {
+    dialog.addEventListener('cancel', e => {
       e.preventDefault();
       close();
     });
   }
 
   function open(html, { onSubmit, onMount } = {}) {
-    content.innerHTML = html;
+    body.innerHTML = html;
 
-    const form = content.querySelector('form');
+    const form = body.querySelector('form');
 
-    onMount?.(content);
+    onMount?.(body);
 
     if (form && onSubmit) {
       form.onsubmit = async e => {
         e.preventDefault();
+
         const data = Object.fromEntries(new FormData(form));
-        await onSubmit(data, content);
+
+        await onSubmit(data, body);
+
         close();
       };
     }
 
-    el.showModal();
+    dialog.showModal();
   }
 
   function close() {
-    el.close();
+    dialog.close();
   }
 
   return { init, open, close };
