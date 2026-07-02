@@ -11,7 +11,6 @@ const defaultDialogStyle = {
 const defaultBodyStyle = {
   padding: 'var(--bits-dialog-padding, 1rem)',
   background: 'var(--bits-dialog-bg, white)',
-  borderRadius: '12px',
   width: '100%',
   maxWidth: '500px',
   maxHeight: '90vh',
