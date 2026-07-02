@@ -35,7 +35,7 @@ const layouts = {
 const Drawer = (() => {
   let drawer;
   let panel;
-  let side = 'right';
+  let currentSide = 'right';
 
   function init(parent = document.body, { position = 'fixed' } = {}) {
     if (drawer) return drawer;
@@ -70,9 +70,9 @@ const Drawer = (() => {
   } = {}) {
     if (!drawer) init();
 
-    side = options.side ?? 'right';
+    currentSide = side;
 
-    const layout = layouts[side];
+    const layout = layouts[currentSide];
 
     drawer.replaceChildren();
 
@@ -122,7 +122,7 @@ const Drawer = (() => {
       drawer.style.visibility = 'hidden';
     }, { once: true });
 
-    panel.style.transform = layouts[side].transform;
+    panel.style.transform = layouts[currentSide].transform;
 
     drawer.style.opacity = '0';
     drawer.style.pointerEvents = 'none';
