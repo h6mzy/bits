@@ -41,12 +41,13 @@ const Drawer = (() => {
     if (drawer) return drawer;
 
     drawer = document.createElement('aside');
+    drawer.className = 'bits-drawer';
 
     Object.assign(drawer.style, {
       position,
       inset: '0',
       display: 'flex',
-      background: 'var(--bits-drawer-overlay, transparent)',
+      background: 'var(--bits-drawer-backdrop, transparent)',
       opacity: '0',
       visibility: 'hidden',
       pointerEvents: 'none',
@@ -86,7 +87,7 @@ const Drawer = (() => {
       maxHeight: '100%',
       background: 'var(--bits-drawer-bg, white)',
       overflow: 'auto',
-      padding: '1rem',
+      padding: 'var(--bits-drawer-padding, 1rem)',
       boxShadow: '0 0 1rem rgb(0 0 0 / .15)',
       transform: layout.transform,
       transition: 'transform .2s'
