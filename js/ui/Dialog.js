@@ -1,3 +1,5 @@
+import { injectCSS } from './css.js';
+
 const defaultDialogStyle = {
   border: 'none',
   padding: '0',
@@ -19,17 +21,34 @@ const defaultBodyStyle = {
 const Dialog = (() => {
   let dialog;
   let body;
+  let removeBackdropCSS;
 
-  function init(parent = document.body, { dialogStyle, bodyStyle } = {}) {
+  function init(parent = document.body, { 
+    dialogStyle,
+    bodyStyle,
+    backdropStyle
+  } = {}) {
+
     dialog = document.createElement('dialog');
     dialog.className = 'dialog';
     body = document.createElement('div');
+
+    const id = crypto.randomUUID();
+
+    dialog.dataset.bits = id;
 
     Object.assign(dialog.style, defaultDialogStyle);
     Object.assign(body.style, defaultBodyStyle);
 
     Object.assign(dialog.style, dialogStyle);
     Object.assign(body.style, bodyStyle);
+
+    removeBackdropCSS?.();
+
+    removeBackdropCSS = injectCSS(
+      `dialog[data-bits="${id}"]::backdrop`,
+      backdropStyle
+    );
 
     dialog.append(body);
     parent.append(dialog);
