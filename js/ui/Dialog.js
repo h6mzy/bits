@@ -1,5 +1,5 @@
 const defaultDialogStyle = {
-  position = 'fixed',
+  position: 'fixed',
   inset: '0',
   display: 'flex',
   alignItems: 'center',
