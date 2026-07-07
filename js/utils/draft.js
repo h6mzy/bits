@@ -44,7 +44,10 @@ export function draft(data) {
     });
 
     // Update object
-    form.addEventListener('input', e => {
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    
+    function update(e) {
       const input = e.target;
 
       if (!input.name) return;
@@ -69,7 +72,7 @@ export function draft(data) {
       }
 
       set(value, input.name, val);
-    });
+    }
   }
 
   function diff() {
