@@ -84,15 +84,15 @@ export function draft(data) {
 
   async function save(fn) {
     const changes = diff();
-
+  
     if (!Object.keys(changes).length)
       return;
-
-    await fn(changes, value);
-
+  
+    const result = await fn(changes, value);
+  
     commit();
-
-    return changes;
+  
+    return result;
   }
 }
 
