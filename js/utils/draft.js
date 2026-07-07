@@ -2,21 +2,23 @@ export function draft(data) {
   const original = structuredClone(data);
   const value = structuredClone(data);
 
-  return {
+  const api = {
     original,
     value,
-
+  
     bind,
     diff,
     reset,
     commit,
     save,
-
+  
     get changed() {
       return Object.keys(diff()).length > 0;
     }
   };
 
+  return api;
+  
   function bind(form) {
     form = typeof form === 'string'
       ? document.querySelector(form)
@@ -76,10 +78,12 @@ export function draft(data) {
 
   function reset() {
     replace(value, original);
+    return api;
   }
 
   function commit() {
     replace(original, value);
+    return api;
   }
 
   async function save(fn) {
