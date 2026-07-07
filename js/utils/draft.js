@@ -1,6 +1,7 @@
 export function draft(data) {
   const original = structuredClone(data);
   const value = structuredClone(data);
+  const empty = structuredClone(data);
 
   const api = {
     original,
@@ -82,6 +83,10 @@ export function draft(data) {
   function reset() {
     replace(value, original);
     return api;
+  }
+
+  function clear() {
+    replace(value, empty);
   }
 
   function commit() {
