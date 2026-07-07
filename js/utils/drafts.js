@@ -1,4 +1,4 @@
-export default function draft(data) {
+export function draft(data) {
   const original = structuredClone(data);
   const value = structuredClone(data);
 
