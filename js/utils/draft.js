@@ -10,6 +10,7 @@ export function draft(data) {
     bind,
     diff,
     reset,
+    clear,
     commit,
     save,
   
@@ -74,6 +75,7 @@ export function draft(data) {
 
       set(value, input.name, val);
     }
+    return api;
   }
 
   function diff() {
@@ -87,6 +89,7 @@ export function draft(data) {
 
   function clear() {
     replace(value, empty);
+    return api;
   }
 
   function commit() {
