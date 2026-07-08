@@ -3,6 +3,7 @@ import Drawer from './ui/Drawer.js';
 import Toast from './ui/Toast.js';
 import Countdown from './ui/Countdown.js';
 
+import { bind } from './utils/bind.js';
 import { chunk } from './utils/chunk.js';
 import { draft } from './utils/draft.js';
 import { drag } from './utils/drag.js';
@@ -19,6 +20,7 @@ export {
   Drawer,
   Toast,
   Countdown,
+  bind,
   chunk,
   draft,
   drag,
