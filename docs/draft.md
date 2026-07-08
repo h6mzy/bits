@@ -76,6 +76,10 @@ Accepts current values as the new original.
 
 Clears all values while preserving object structure.
 
+### `draft.update()`
+
+Update values.
+
 ### `draft.save(fn)`
 
 Runs `fn(changes, value)` and commits on success.
