@@ -21,6 +21,7 @@ export function draft(data) {
     reset,
     commit,
     clear,
+    update,
     save,
     subscribe
   };
@@ -46,6 +47,12 @@ export function draft(data) {
   function clear() {
     return apply(() => {
       replace(value, empty);
+    });
+  }
+
+  function update(path, value) {
+    return apply(() => {
+      set(draft.value, path, value);
     });
   }
 
