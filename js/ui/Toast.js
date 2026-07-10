@@ -22,7 +22,11 @@ const defaultToastStyle = {
 const Toast = (() => {
   let root;
 
-  function init(parent = document.body, { rootStyle = {} } = {}) {
+  function init({ 
+    parent = document.body,
+    rootStyle = {}
+  } = {}) {
+    
     if (root) return;
 
     root = document.createElement('div');
