@@ -37,7 +37,11 @@ const Drawer = (() => {
   let panel;
   let currentSide = 'right';
 
-  function init(parent = document.body, { position = 'fixed' } = {}) {
+  function init({ 
+    parent = document.body,
+    position = 'fixed'
+  } = {}) {
+    
     if (drawer) return drawer;
 
     drawer = document.createElement('aside');
