@@ -36,11 +36,8 @@ const Dialog = (() => {
 
     dialog.dataset.bits = id;
 
-    Object.assign(dialog.style, defaultDialogStyle);
-    Object.assign(body.style, defaultBodyStyle);
-
-    Object.assign(dialog.style, dialogStyle);
-    Object.assign(body.style, bodyStyle);
+    Object.assign(dialog.style, defaultDialogStyle, dialogStyle);
+    Object.assign(body.style, defaultBodyStyle, bodyStyle);
 
     removeBackdropCSS?.();
 
