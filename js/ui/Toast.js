@@ -1,50 +1,77 @@
+const defaultRootStyle = {
+  position: 'fixed',
+  left: '50%',
+  bottom: '20px',
+  transform: 'translateX(-50%)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
+  zIndex: '9999',
+  pointerEvents: 'none'
+};
+
+const defaultToastStyle = {
+  padding: '12px 16px',
+  borderRadius: '8px',
+  opacity: '0',
+  transform: 'translateY(6px)',
+  transition: 'opacity .2s ease, transform .2s ease',
+  pointerEvents: 'auto'
+};
+
 const Toast = (() => {
   let root;
 
-  function init(selector = '#toastRoot') {
-    root = document.querySelector(selector);
+  function init(parent = document.body, { rootStyle = {} } = {}) {
+    if (root) return;
 
-    if (!root) {
-      root = document.createElement('div');
-      root.id = selector.replace('#', '');
-      root.className = 'toast-root';
-      document.body.appendChild(root);
-    }
+    root = document.createElement('div');
+
+    Object.assign(root.style, defaultRootStyle, rootStyle);
+
+    parent.append(root);
   }
 
-  function ensureRoot() {
+  function show(message, {
+    duration = 2500,
+    toastStyle = {}
+  } = {}) {
+
     if (!root) init();
-  }
 
-  function show(message, opts = {}) {
-    ensureRoot();
+    const toast = document.createElement('div');
 
-    const {
-      type = 'default',
-      duration = 2500
-    } = opts;
+    toast.textContent = message;
 
-    const el = document.createElement('div');
-    el.className = `toast ${type}`;
-    el.textContent = message;
+    Object.assign(
+      toast.style,
+      defaultToastStyle,
+      toastStyle
+    );
 
-    root.appendChild(el);
+    root.append(toast);
 
     requestAnimationFrame(() => {
-      el.classList.add('show');
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
     });
 
-    const hide = () => {
-      el.classList.remove('show');
-      el.addEventListener('transitionend', () => {
-        el.remove();
-      }, { once: true });
-    };
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(6px)';
 
-    setTimeout(hide, duration);
+      toast.addEventListener('transitionend', () => {
+        toast.remove();
+      }, { once: true });
+
+    }, duration);
   }
 
-  return { init, show };
+  return {
+    init,
+    show
+  };
+
 })();
 
 export default Toast;
