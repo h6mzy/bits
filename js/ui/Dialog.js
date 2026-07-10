@@ -22,7 +22,8 @@ const Dialog = (() => {
   let body;
   let removeBackdropCSS;
 
-  function init(parent = document.body, { 
+  function init({
+    parent = document.body,
     dialogStyle,
     bodyStyle,
     backdropStyle
