@@ -1,7 +1,8 @@
+import Countdown from './ui/Countdown.js';
 import Dialog from './ui/Dialog.js';
 import Drawer from './ui/Drawer.js';
+import FitText from './ui/FitText.js';
 import Toast from './ui/Toast.js';
-import Countdown from './ui/Countdown.js';
 
 import { bind } from './utils/bind.js';
 import { chunk } from './utils/chunk.js';
@@ -16,10 +17,11 @@ import { pickRandom } from './utils/pickRandom.js';
 import { startCountdown } from './utils/startCountdown.js';
 
 export {
+  Countdown,
   Dialog,
   Drawer,
+  FitText,
   Toast,
-  Countdown,
   bind,
   chunk,
   draft,
