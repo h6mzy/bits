@@ -1,4 +1,4 @@
-export const FitText = (() => {
+const FitText = (() => {
   function init(root = document, {
     min = 8,
     max = 256,
@@ -69,3 +69,5 @@ export const FitText = (() => {
     init
   };
 })();
+
+export default FitText;
