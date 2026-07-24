@@ -1,4 +1,5 @@
 import { injectCSS } from '../utils/injectCSS.js';
+import { mount } from '../utils/mount.js';
 
 const defaultDialogStyle = {
   border: 'none',
@@ -68,7 +69,7 @@ const Dialog = (() => {
     });
   }
 
-  function open(content, { onSubmit, onMount } = {}) {
+  function open(content, options = {}) {
     body.innerHTML = '';
   
     if (typeof content === 'string') {
@@ -77,18 +78,10 @@ const Dialog = (() => {
       body.append(content);
     }
   
-    const form = body.querySelector('form');
-  
-    onMount?.(body);
-  
-    if (form && onSubmit) {
-      form.onsubmit = async e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form));
-        await onSubmit(data, body);
-        close();
-      };
-    }
+    mount(body, {
+      ...options,
+      onClose: close
+    });
   
     dialog.showModal();
   }
