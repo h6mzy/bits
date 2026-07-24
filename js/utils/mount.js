@@ -1,4 +1,4 @@
-function mount(container, onMount, onSubmit, close) {
+export function mount(container, onMount, onSubmit, close) {
   onMount?.(container);
 
   const form = container.querySelector('form');
