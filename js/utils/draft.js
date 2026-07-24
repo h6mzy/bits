@@ -1,11 +1,15 @@
-export function draft(data) {
+export function draft(data, { shallow = false } = {}) {
   if (!isPlainObject(data)) {
     throw new TypeError('draft() expects a plain object.');
   }
 
+  const clone = shallow
+    ? shallowClone
+    : structuredClone;
+
   // State
-  const original = structuredClone(data);
-  const value = structuredClone(data);
+  const original = clone(data);
+  const value = clone(data);
   const empty = createEmpty(data);
 
   const listeners = new Set();
@@ -35,24 +39,24 @@ export function draft(data) {
 
   function reset() {
     return apply(() => {
-      replace(value, original);
+      replace(value, original, clone);
     });
   }
-  
+
   function commit() {
-    replace(original, value);
+    replace(original, value, clone);
     return api;
   }
 
   function clear() {
     return apply(() => {
-      replace(value, empty);
+      replace(value, empty, clone);
     });
   }
 
   function update(path, value) {
     return apply(() => {
-      set(draft.value, path, value);
+      set(api.value, path, value);
     });
   }
 
@@ -71,7 +75,6 @@ export function draft(data) {
 
   function subscribe(fn) {
     listeners.add(fn);
-
     return () => listeners.delete(fn);
   }
 
@@ -83,8 +86,6 @@ export function draft(data) {
   }
 
   function notify() {
-    if (!listeners.size) return;
-
     listeners.forEach(fn => fn(api));
   }
 
@@ -94,6 +95,16 @@ export function draft(data) {
 }
 
 // Helpers
+function shallowClone(value) {
+  if (Array.isArray(value))
+    return [...value];
+
+  if (isPlainObject(value))
+    return { ...value };
+
+  return value;
+}
+
 function isPlainObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
@@ -116,15 +127,15 @@ function set(obj, path, value) {
   target[last] = value;
 }
 
-function replace(target, source) {
+function replace(target, source, clone) {
   if (Array.isArray(target)) {
     target.length = 0;
-    target.push(...structuredClone(source));
+    target.push(...clone(source));
     return;
   }
 
   Object.keys(target).forEach(key => delete target[key]);
-  Object.assign(target, structuredClone(source));
+  Object.assign(target, clone(source));
 }
 
 function equal(a, b) {
@@ -165,7 +176,6 @@ function equal(a, b) {
     );
   }
 
-  // Everything else (Date, File, Blob, Map, Set, etc.)
   return false;
 }
 
@@ -186,8 +196,7 @@ function diffObject(original, value) {
       before &&
       after &&
       isPlainObject(before) &&
-      isPlainObject(after) &&
-      !Array.isArray(before)
+      isPlainObject(after)
     ) {
       const child = diffObject(before, after);
 
