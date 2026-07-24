@@ -12,6 +12,7 @@ import { escapeHTML } from './utils/escapeHTML.js';
 import { formatDate } from './utils/formatDate.js';
 import { injectCSS } from './utils/injectCSS.js';
 import { loadImage } from './utils/loadImage.js';
+import { mount } from './utils/mount.js';
 import { optimizeImage } from './utils/optimizeImage.js';
 import { pickRandom } from './utils/pickRandom.js';
 import { startCountdown } from './utils/startCountdown.js';
@@ -30,6 +31,7 @@ export {
   formatDate,
   injectCSS,
   loadImage,
+  mount,
   optimizeImage,
   pickRandom,
   startCountdown
