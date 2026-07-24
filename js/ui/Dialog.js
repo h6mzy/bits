@@ -1,5 +1,4 @@
-import { injectCSS } from '../utils/injectCSS.js';
-import { mount } from '../utils/mount.js';
+import { injectCSS, mount, render } from '../index.js';
 
 const defaultDialogStyle = {
   border: 'none',
@@ -70,13 +69,7 @@ const Dialog = (() => {
   }
 
   function open(content, options = {}) {
-    body.innerHTML = '';
-  
-    if (typeof content === 'string') {
-      body.innerHTML = content;
-    } else {
-      body.append(content);
-    }
+    render(body, content);
   
     mount(body, {
       ...options,
