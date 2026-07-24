@@ -15,6 +15,7 @@ import { loadImage } from './utils/loadImage.js';
 import { mount } from './utils/mount.js';
 import { optimizeImage } from './utils/optimizeImage.js';
 import { pickRandom } from './utils/pickRandom.js';
+import { render } from './utils/render.js';
 import { startCountdown } from './utils/startCountdown.js';
 
 export {
@@ -34,5 +35,6 @@ export {
   mount,
   optimizeImage,
   pickRandom,
+  render,
   startCountdown
 };
