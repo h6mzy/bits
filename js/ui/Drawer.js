@@ -69,9 +69,8 @@ const Drawer = (() => {
   }
 
   function open(content, {
-    side = 'right',
-    onSubmit,
-    onMount
+    ...options,
+    side = 'right'
   } = {}) {
     if (!drawer) init();
 
@@ -114,20 +113,12 @@ const Drawer = (() => {
       drawer.style.pointerEvents = 'auto';
       panel.style.transform = 'translate(0, 0)';
     });
-
-    const form = panel.querySelector('form');
-
-    onMount?.(panel);
-  
-    if (form && onSubmit) {
-      form.onsubmit = async e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form));
-        await onSubmit(data, panel);
-        close();
-      };
-    }
-
+    
+    mount(panel, {
+      ...options,
+      onClose: close
+    });
+    
     return panel;
   }
 
