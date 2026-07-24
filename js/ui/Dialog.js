@@ -68,25 +68,28 @@ const Dialog = (() => {
     });
   }
 
-  function open(html, { onSubmit, onMount } = {}) {
-    body.innerHTML = html;
-
+  function open(content, { onSubmit, onMount } = {}) {
+    body.innerHTML = '';
+  
+    if (typeof content === 'string') {
+      body.innerHTML = content;
+    } else {
+      body.append(content);
+    }
+  
     const form = body.querySelector('form');
-
+  
     onMount?.(body);
-
+  
     if (form && onSubmit) {
       form.onsubmit = async e => {
         e.preventDefault();
-
         const data = Object.fromEntries(new FormData(form));
-
         await onSubmit(data, body);
-
         close();
       };
     }
-
+  
     dialog.showModal();
   }
 
