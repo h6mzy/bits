@@ -15,6 +15,10 @@ async function Confirm(options) {
           Dialog.close();
           resolve(true);
         };
+      },
+
+      onClose() {
+        resolve(false);
       }
     });
 
