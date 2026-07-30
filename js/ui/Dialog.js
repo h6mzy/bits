@@ -30,7 +30,7 @@ const Dialog = (() => {
   } = {}) {
 
     dialog = document.createElement('dialog');
-    dialog.className = 'dialog';
+    dialog.className = 'bits-dialog';
     body = document.createElement('div');
 
     const id = crypto.randomUUID();
@@ -69,6 +69,9 @@ const Dialog = (() => {
   }
 
   function open(content, options = {}) {
+    if (!dialog)
+      init();
+    
     render(body, content);
   
     mount(body, {
