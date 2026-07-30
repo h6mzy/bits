@@ -1,6 +1,6 @@
 import { Dialog } from '../index.js'
 
-export async function confirm(options) {
+export async function Confirm(options) {
   return new Promise(resolve => {
 
     Dialog.open(template(options), {
