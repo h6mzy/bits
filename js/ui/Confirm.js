@@ -26,7 +26,7 @@ async function confirm({
       </div>
     `);
 
-    const dialog = document.querySelector('.bits-dialog');
+    const dialog = document.querySelector('.dialog');
 
     dialog.querySelector('[data-cancel]').onclick = () => {
       Dialog.close();
