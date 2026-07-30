@@ -1,41 +1,22 @@
 import { Dialog } from '../index.js'
 
-async function confirm({
-  title = 'Confirm',
-  message = '',
-  confirmText = 'OK',
-  cancelText = 'Cancel'
-} = {}) {
-
+export async function confirm(options) {
   return new Promise(resolve => {
 
-    Dialog.open(`
-      <div class="bits-confirm">
-        <h3>${title}</h3>
-        <p>${message}</p>
+    Dialog.open(template(options), {
+      onMount(body) {
 
-        <footer>
-          <button type="button" data-cancel>
-            ${cancelText}
-          </button>
+        body.querySelector('[data-cancel]').onclick = () => {
+          Dialog.close();
+          resolve(false);
+        };
 
-          <button type="button" data-confirm>
-            ${confirmText}
-          </button>
-        </footer>
-      </div>
-    `);
+        body.querySelector('[data-confirm]').onclick = () => {
+          Dialog.close();
+          resolve(true);
+        };
+      }
+    });
 
-    const dialog = document.querySelector('.dialog');
-
-    dialog.querySelector('[data-cancel]').onclick = () => {
-      Dialog.close();
-      resolve(false);
-    };
-
-    dialog.querySelector('[data-confirm]').onclick = () => {
-      Dialog.close();
-      resolve(true);
-    };
   });
 }
