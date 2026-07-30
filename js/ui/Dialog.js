@@ -5,6 +5,7 @@ const defaultDialogStyle = {
   padding: '0',
   margin: 'auto',
   background: 'transparent',
+  color: 'currentColor',
   overflow: 'visible'
 };
 
