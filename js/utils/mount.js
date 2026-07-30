@@ -1,4 +1,11 @@
-export function mount(container, onMount, onSubmit, close) {
+export function mount(
+  container,
+  {
+    onMount,
+    onSubmit,
+    onClose
+  } = {}
+) {
   onMount?.(container);
 
   const form = container.querySelector('form');
@@ -13,6 +20,6 @@ export function mount(container, onMount, onSubmit, close) {
 
     await onSubmit(data, container);
 
-    close();
+    onClose?.();
   };
 }
