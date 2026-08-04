@@ -2,6 +2,7 @@ import Confirm from './ui/Confirm.js';
 import Countdown from './ui/Countdown.js';
 import Dialog from './ui/Dialog.js';
 import Drawer from './ui/Drawer.js';
+import FillText from './ui/FillText.js';
 import FitText from './ui/FitText.js';
 import Toast from './ui/Toast.js';
 
@@ -24,6 +25,7 @@ export {
   Countdown,
   Dialog,
   Drawer,
+  FillText,
   FitText,
   Toast,
   bind,
