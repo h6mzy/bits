@@ -23,6 +23,8 @@
 
 const cache = new Map();
 
+const EMPTY_SVG = "<svg></svg>";
+
 let base = "";
 
 const resolve = url =>
@@ -49,11 +51,11 @@ async function load(url) {
     return svg;
 
   } catch (err) {
-    console.warn(`SVG not found: ${url}`, err);
+    console.warn(`SVG not found: ${url}`);
 
-    cache.set(url, "");
+    cache.set(url, EMPTY_SVG);
 
-    return "";
+    return EMPTY_SVG;
   }
 }
 
@@ -64,7 +66,7 @@ async function preload(urls = []) {
 }
 
 function get(url) {
-  return cache.get(resolve(url)) ?? "";
+  return cache.get(resolve(url)) ?? EMPTY_SVG;
 }
 
 function has(url) {
