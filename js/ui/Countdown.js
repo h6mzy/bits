@@ -23,11 +23,18 @@ const Countdown = (() => {
     let id;
     let stopped = false;
 
+    const set = (el, value) => {
+      if (!el) return;
+    
+      el.textContent = pad(value);
+      el.parentElement.hidden = value === 0;
+    };
+
     const update = (d, h, m, s) => {
-      if (els.days) els.days.textContent = pad(d);
-      if (els.hours) els.hours.textContent = pad(h);
-      if (els.minutes) els.minutes.textContent = pad(m);
-      if (els.seconds) els.seconds.textContent = pad(s);
+      set(els.days, d);
+      set(els.hours, h);
+      set(els.minutes, m);
+      set(els.seconds, s);
     };
 
     const tick = () => {
