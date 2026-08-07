@@ -23,17 +23,17 @@ const Countdown = (() => {
     let id;
     let stopped = false;
 
-    const set = (el, value) => {
+    const set = (el, value, fin = false) => {
       if (!el) return;
     
       el.textContent = pad(value);
-      el.parentElement.hidden = value === 0;
+      el.parentElement.classList.toggle("finished", fin);
     };
 
     const update = (d, h, m, s) => {
-      set(els.days, d);
-      set(els.hours, h);
-      set(els.minutes, m);
+      set(els.days, d, d === 0);
+      set(els.hours, h, d + h === 0);
+      set(els.minutes, m, d + h + m === 0);
       set(els.seconds, s);
     };
 
