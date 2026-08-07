@@ -23,7 +23,7 @@
 
 const cache = new Map();
 
-const EMPTY_SVG = "<svg></svg>";
+const EMPTY_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"></svg>`;
 
 let base = "";
 
