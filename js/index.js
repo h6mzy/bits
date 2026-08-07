@@ -4,6 +4,7 @@ import Dialog from './ui/Dialog.js';
 import Drawer from './ui/Drawer.js';
 import FillText from './ui/FillText.js';
 import FitText from './ui/FitText.js';
+import SVG from './ui/SVG.js';
 import Toast from './ui/Toast.js';
 
 import { bind } from './utils/bind.js';
@@ -27,6 +28,7 @@ export {
   Drawer,
   FillText,
   FitText,
+  SVG,
   Toast,
   bind,
   chunk,
