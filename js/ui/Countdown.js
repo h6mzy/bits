@@ -26,8 +26,12 @@ const Countdown = (() => {
     const set = (el, value, fin = false) => {
       if (!el) return;
     
-      el.textContent = pad(value);
-      el.parentElement.classList.toggle("finished", fin);
+      const [tens, ones] = pad(value);
+    
+      el.children[0].textContent = tens;
+      el.children[1].textContent = ones;
+    
+      el.parentElement.classList.toggle('finished', fin);
     };
 
     const update = (d, h, m, s) => {
