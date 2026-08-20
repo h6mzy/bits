@@ -1,6 +1,6 @@
 import { createElement } from '../index.js';
 
-export const Carousel = ({
+const Carousel = ({
   slides = [],
   gap = '1rem',
   padding = '1rem',
@@ -50,3 +50,5 @@ export const Carousel = ({
 
   return carousel;
 };
+
+export default Carousel;
