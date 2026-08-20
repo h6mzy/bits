@@ -5,7 +5,13 @@ export const createElement = (element, props = {}) => {
     if (key === 'dataset') {
       Object.assign(el.dataset, value);
     } else if (key === 'style') {
-      Object.assign(el.style, value);
+      for (const [property, propertyValue] of Object.entries(value)) {
+        if (property.startsWith('--')) {
+          el.style.setProperty(property, propertyValue);
+        } else {
+          el.style[property] = propertyValue;
+        }
+      }
     } else {
       el[key] = value;
     }
