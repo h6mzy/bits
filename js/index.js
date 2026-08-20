@@ -1,3 +1,4 @@
+import Carousel from './ui/Carousel.js';
 import Confirm from './ui/Confirm.js';
 import Countdown from './ui/Countdown.js';
 import Dialog from './ui/Dialog.js';
@@ -22,6 +23,7 @@ import { render } from './utils/render.js';
 import { startCountdown } from './utils/startCountdown.js';
 
 export {
+  Carousel,
   Confirm,
   Countdown,
   Dialog,
