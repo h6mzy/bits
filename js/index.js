@@ -10,6 +10,7 @@ import Toast from './ui/Toast.js';
 
 import { bind } from './utils/bind.js';
 import { chunk } from './utils/chunk.js';
+import { createElement } from './utils/createElement.js';
 import { draft } from './utils/draft.js';
 import { drag } from './utils/drag.js';
 import { escapeHTML } from './utils/escapeHTML.js';
@@ -34,6 +35,7 @@ export {
   Toast,
   bind,
   chunk,
+  createElement,
   draft,
   drag,
   escapeHTML,
