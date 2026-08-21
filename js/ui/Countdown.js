@@ -1,33 +1,43 @@
 const Countdown = (() => {
   const pad = n => String(n).padStart(2, '0');
 
-  function mount(selector, target) {
-    const root = typeof selector === 'string'
-      ? document.querySelector(selector)
-      : selector;
+  const createUnit = (key, label) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'bits-countdown-col';
+    
+    const number = document.createElement('span');
+    number.className = 'bits-num';
+    number.dataset[key] = '';
+    
+    const unit = document.createElement('span');
+    unit.className = 'bits-unit';
+    unit.textContent = label;
+    
+    wrapper.append(number, unit);
+    
+    return wrapper;
+  };
 
-    if (!root) return;
-
+  function start(root, target) {
     const els = {
       days: root.querySelector('[data-days]'),
       hours: root.querySelector('[data-hours]'),
       minutes: root.querySelector('[data-minutes]'),
-      seconds: root.querySelector('[data-seconds]'),
+      seconds: root.querySelector('[data-seconds]')
     };
 
-    const targetTime =
-      typeof target === 'number'
-        ? target
-        : new Date(target).getTime();
+    const targetTime = typeof target === 'number'
+      ? target
+      : new Date(target).getTime();
 
     let id;
     let stopped = false;
 
-    const set = (el, value, fin = false) => {
+    const set = (el, value, finished = false) => {
       if (!el) return;
 
       el.textContent = pad(value);
-      el.parentElement.classList.toggle("finished", fin);
+      el.parentElement.classList.toggle('finished', finished);
     };
 
     const update = (d, h, m, s) => {
@@ -49,9 +59,15 @@ const Countdown = (() => {
         return;
       }
 
-      const d = Math.floor(diff / 86400000); diff %= 86400000;
-      const h = Math.floor(diff / 3600000);  diff %= 3600000;
-      const m = Math.floor(diff / 60000);    diff %= 60000;
+      const d = Math.floor(diff / 86400000);
+      diff %= 86400000;
+
+      const h = Math.floor(diff / 3600000);
+      diff %= 3600000;
+
+      const m = Math.floor(diff / 60000);
+      diff %= 60000;
+
       const s = Math.floor(diff / 1000);
 
       update(d, h, m, s);
@@ -64,16 +80,30 @@ const Countdown = (() => {
       stop() {
         stopped = true;
         clearInterval(id);
-      },
-
-      restart(newTarget) {
-        clearInterval(id);
-        return mount(root, newTarget ?? targetTime);
       }
     };
   }
 
-  return { mount };
+  function create(target) {
+    const root = createElement('div');
+    root.className = 'bits-countdown';
+
+    root.append(
+      createUnit('days', 'DAY'),
+      createUnit('hours', 'HRS'),
+      createUnit('minutes', 'MIN'),
+      createUnit('seconds', 'SEC')
+    );
+
+    const controller = start(root, target);
+
+    return {
+      element: root,
+      stop: controller.stop
+    };
+  }
+
+  return create;
 })();
 
 export default Countdown;
