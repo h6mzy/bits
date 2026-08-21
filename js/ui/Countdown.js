@@ -3,35 +3,42 @@ const Countdown = (() => {
 
   const createUnit = (key, label) => {
     const wrapper = document.createElement('div');
-    wrapper.className = 'bits-countdown-col';
-    
+    wrapper.className = 'bits-time';
+
     const number = document.createElement('span');
     number.className = 'bits-num';
     number.dataset[key] = '';
-    
+
     const unit = document.createElement('span');
     unit.className = 'bits-unit';
     unit.textContent = label;
-    
+
     wrapper.append(number, unit);
-    
+
     return wrapper;
   };
 
-  function start(root, target) {
+  const Countdown = target => {
+    const root = document.createElement('div');
+    root.className = 'bits-countdown';
+
+    root.append(
+      createUnit('days', 'DAY'),
+      createUnit('hours', 'HRS'),
+      createUnit('minutes', 'MIN'),
+      createUnit('seconds', 'SEC')
+    );
+
+    let interval;
+    let stopped = false;
+    let targetTime;
+
     const els = {
       days: root.querySelector('[data-days]'),
       hours: root.querySelector('[data-hours]'),
       minutes: root.querySelector('[data-minutes]'),
       seconds: root.querySelector('[data-seconds]')
     };
-
-    const targetTime = typeof target === 'number'
-      ? target
-      : new Date(target).getTime();
-
-    let id;
-    let stopped = false;
 
     const set = (el, value, finished = false) => {
       if (!el) return;
@@ -53,7 +60,7 @@ const Countdown = (() => {
       let diff = targetTime - Date.now();
 
       if (diff <= 0) {
-        clearInterval(id);
+        clearInterval(interval);
         update(0, 0, 0, 0);
         root.classList.add('ended');
         return;
@@ -73,37 +80,37 @@ const Countdown = (() => {
       update(d, h, m, s);
     };
 
-    id = setInterval(tick, 1000);
-    tick();
+    const start = newTarget => {
+      targetTime =
+        typeof newTarget === 'number'
+          ? newTarget
+          : new Date(newTarget).getTime();
 
-    return {
-      stop() {
-        stopped = true;
-        clearInterval(id);
-      }
+      stopped = false;
+
+      root.classList.remove('ended');
+
+      clearInterval(interval);
+
+      tick();
+      interval = setInterval(tick, 1000);
     };
-  }
 
-  function create(target) {
-    const root = createElement('div');
-    root.className = 'bits-countdown';
-
-    root.append(
-      createUnit('days', 'DAY'),
-      createUnit('hours', 'HRS'),
-      createUnit('minutes', 'MIN'),
-      createUnit('seconds', 'SEC')
-    );
-
-    const controller = start(root, target);
-
-    return {
-      element: root,
-      stop: controller.stop
+    root.stop = () => {
+      stopped = true;
+      clearInterval(interval);
     };
-  }
 
-  return create;
+    root.restart = newTarget => {
+      start(newTarget ?? target);
+    };
+
+    start(target);
+
+    return root;
+  };
+
+  return Countdown;
 })();
 
 export default Countdown;
