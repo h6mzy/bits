@@ -15,6 +15,7 @@ import { draft } from './utils/draft.js';
 import { drag } from './utils/drag.js';
 import { escapeHTML } from './utils/escapeHTML.js';
 import { formatDate } from './utils/formatDate.js';
+import { imageExists } from './utils/imageExists.js';
 import { injectCSS } from './utils/injectCSS.js';
 import { loadImage } from './utils/loadImage.js';
 import { mount } from './utils/mount.js';
@@ -40,6 +41,7 @@ export {
   drag,
   escapeHTML,
   formatDate,
+  imageExists,
   injectCSS,
   loadImage,
   mount,
