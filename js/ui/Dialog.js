@@ -4,7 +4,7 @@ const defaultDialogStyle = {
   border: 'none',
   padding: '0',
   margin: 'auto',
-  background: 'transparent',
+  background: 'var(--bits-dialog-backdrop, transparent)',
   color: 'currentColor',
   overflow: 'visible'
 };
