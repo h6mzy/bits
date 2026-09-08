@@ -17,7 +17,17 @@ const FillText = {
       if (!text) return;
 
       const { x, y, width, height } = text.getBBox();
-      svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+
+      const stroke = parseFloat(
+        getComputedStyle(text).strokeWidth
+      ) || 0;
+
+      const padding = stroke / 2 + 1;
+
+      svg.setAttribute(
+        'viewBox',
+        `${x - padding} ${y - padding} ${width + padding * 2} ${height + padding * 2}`
+      );
     });
   }
 };
