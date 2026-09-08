@@ -1,66 +1,16 @@
-import { injectCSS, mount, render } from '../index.js';
-
-const defaultDialogStyle = {
-  border: 'none',
-  padding: '0',
-  margin: 'auto',
-  background: 'var(--bits-dialog-backdrop, transparent)',
-  color: 'currentColor',
-  overflow: 'visible'
-};
-
-const defaultBodyStyle = {
-  padding: 'var(--bits-dialog-padding, 1rem)',
-  background: 'var(--bits-dialog-bg, white)',
-  width: '100%',
-  maxWidth: '500px',
-  maxHeight: '90vh',
-  overflowY: 'auto'
-};
+import { render } from '../index.js';
 
 const Dialog = (() => {
   let dialog;
-  let body;
-  let removeBackdropCSS;
 
-  function init({
-    parent = document.body,
-    dialogStyle,
-    bodyStyle,
-    backdropStyle
-  } = {}) {
-
+  function init({ parent = document.body } = {}) {
     dialog = document.createElement('dialog');
     dialog.className = 'bits-dialog';
-    body = document.createElement('div');
 
-    const id = crypto.randomUUID();
-
-    dialog.dataset.bits = id;
-
-    Object.assign(dialog.style, defaultDialogStyle, dialogStyle);
-    Object.assign(body.style, defaultBodyStyle, bodyStyle);
-
-    removeBackdropCSS?.();
-
-    removeBackdropCSS = injectCSS(
-      `dialog[data-bits="${id}"]::backdrop`,
-      backdropStyle
-    );
-
-    dialog.append(body);
     parent.append(dialog);
 
     dialog.addEventListener('click', e => {
-      const rect = body.getBoundingClientRect();
-
-      const inside =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
-
-      if (!inside) close();
+      if (e.target === dialog) close();
     });
 
     dialog.addEventListener('cancel', e => {
@@ -69,22 +19,15 @@ const Dialog = (() => {
     });
   }
 
-  function open(content, options = {}) {
-    if (!dialog)
-      init();
-    
-    render(body, content);
-  
-    mount(body, {
-      ...options,
-      onClose: close
-    });
-  
+  function open(content) {
+    if (!dialog) init();
+
+    render(dialog, content);
     dialog.showModal();
   }
 
   function close() {
-    dialog.close();
+    dialog?.close();
   }
 
   return { init, open, close };
