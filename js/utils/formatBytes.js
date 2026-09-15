@@ -1,4 +1,4 @@
-function formatBytes(bytes) {
+export const formatBytes = (bytes) => {
   if (bytes < 1024) return `${bytes} B`;
 
   if (bytes < 1024 * 1024) {
