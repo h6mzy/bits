@@ -14,6 +14,7 @@ import { createElement } from './utils/createElement.js';
 import { draft } from './utils/draft.js';
 import { drag } from './utils/drag.js';
 import { escapeHTML } from './utils/escapeHTML.js';
+import { formatBytes } from './utils/formatBytes.js';
 import { formatDate } from './utils/formatDate.js';
 import { imageExists } from './utils/imageExists.js';
 import { injectCSS } from './utils/injectCSS.js';
@@ -40,6 +41,7 @@ export {
   draft,
   drag,
   escapeHTML,
+  formatBytes,
   formatDate,
   imageExists,
   injectCSS,
