@@ -19,6 +19,7 @@ import { formatDate } from './utils/formatDate.js';
 import { imageExists } from './utils/imageExists.js';
 import { injectCSS } from './utils/injectCSS.js';
 import { loadImage } from './utils/loadImage.js';
+import { loadImageFile } from './utils/loadImageFile.js';
 import { mount } from './utils/mount.js';
 import { optimizeImage } from './utils/optimizeImage.js';
 import { pickRandom } from './utils/pickRandom.js';
@@ -46,6 +47,7 @@ export {
   imageExists,
   injectCSS,
   loadImage,
+  loadImageFile,
   mount,
   optimizeImage,
   pickRandom,
