@@ -4,6 +4,8 @@ const Dialog = (() => {
   let dialog;
 
   function init({ parent = document.body } = {}) {
+    if (dialog) return;
+
     dialog = document.createElement('dialog');
     dialog.className = 'bits-dialog';
 
@@ -24,6 +26,8 @@ const Dialog = (() => {
 
     render(dialog, content);
     dialog.showModal();
+
+    return dialog;
   }
 
   function close() {
